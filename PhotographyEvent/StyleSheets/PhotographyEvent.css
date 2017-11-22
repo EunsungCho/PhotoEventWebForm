@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.mainleft {
+    float: left;
+    width: 150px;
+}
+
+.mainright {
+    float: right;
+    width: calc(100% - 150px);
+    align-content: center;
+}
