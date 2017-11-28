@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    Main Page <a href="Administration/EventsList.aspx">Events List</a><br />
-    <a href="Test/Test.aspx">Test page</a>
+    Main Page<br />
+    <a href="Administration/EventsList.aspx">Events List</a><br />
+    <%--<a href="Test/Test.aspx">Test page</a>--%>
 </asp:Content>

@@ -61,7 +61,9 @@
                     <td style="text-align: center;"></td>
                 </tr>
             </table>
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+            <div>
+                <asp:Button ID="btnSave" runat="server" Text="Add New Event" OnClick="btnSave_Click" />
+            </div>            
         </div>
     </div>
 </asp:Content>

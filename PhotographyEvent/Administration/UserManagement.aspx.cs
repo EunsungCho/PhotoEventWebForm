@@ -21,6 +21,7 @@ namespace PhotographyEvent.Administration
         {
             string userId = e.CommandArgument.ToString();
             SetUserEventsGrid(userId);
+            lblUser.Text = userId + @"'s participation information";
         }
 
         private void UsersBind()

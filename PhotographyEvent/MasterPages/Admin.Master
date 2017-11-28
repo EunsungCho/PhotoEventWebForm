@@ -14,7 +14,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div>
-            Log & Photography Events Title & Login part&nbsp;&nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" />
+            Logo & Photography Events Title & Login part&nbsp;&nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" />
         </div>
         <div class="mainleft">
             <a href="../Administration/EventsList.aspx">Events List</a><br />

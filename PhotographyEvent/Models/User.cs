@@ -168,5 +168,21 @@ namespace PhotographyEvent.Models
                 }
             }
         }
+
+        public static string getUserFirstName(string userId)
+        {
+            string select = @"SELECT firstName From Users Where userId = @findingId";
+            string fName = string.Empty;
+            Dictionary<string, string> pList = new Dictionary<string, string>();
+            pList.Add("findingId", userId);
+            using (SqlDataReader reader = Libs.DbHandler.getResultAsDataReaderDicParam(select, pList))
+            {
+                if (reader.Read())
+                {
+                    fName = reader["firstName"].ToString();
+                }                
+            }
+            return fName;
+        }
     }
 }

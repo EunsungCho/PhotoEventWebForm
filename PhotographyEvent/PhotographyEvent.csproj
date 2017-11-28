@@ -73,6 +73,8 @@
     <Content Include="CreateNewAccount.aspx" />
     <Content Include="Events\AccountInfo.aspx" />
     <Content Include="Events\CurrentEvent.aspx" />
+    <Content Include="Events\EventDetails.aspx" />
+    <Content Include="Events\PopupPhoto.aspx" />
     <Content Include="Events\PreviousEvents.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
@@ -99,6 +101,7 @@
     <Content Include="Scripts\jquery.ui.datepicker.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\PhotoEvents\JavaScript.js" />
     <Content Include="StyleSheets\PhotographyEvent.css" />
     <Content Include="Test\Test.aspx" />
     <Content Include="Test\Test2.aspx" />
@@ -155,6 +158,20 @@
     </Compile>
     <Compile Include="Events\CurrentEvent.aspx.designer.cs">
       <DependentUpon>CurrentEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Events\EventDetails.aspx.cs">
+      <DependentUpon>EventDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Events\EventDetails.aspx.designer.cs">
+      <DependentUpon>EventDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Events\PopupPhoto.aspx.cs">
+      <DependentUpon>PopupPhoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Events\PopupPhoto.aspx.designer.cs">
+      <DependentUpon>PopupPhoto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Events\PreviousEvents.aspx.cs">
       <DependentUpon>PreviousEvents.aspx</DependentUpon>

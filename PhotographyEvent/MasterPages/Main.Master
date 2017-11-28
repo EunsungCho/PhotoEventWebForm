@@ -7,6 +7,7 @@
     <title></title>
     <link href="../StyleSheets/PhotographyEvent.css" rel="stylesheet" />    
     <script src="../Scripts/jquery-1.4.4.js"></script>
+    <script src="../Scripts/PhotoEvents/JavaScript.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -14,7 +15,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div>
-            Log & Photography Events Title & Login part&nbsp;&nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" />
+            Logo & Photography Events Title & Login part&nbsp;&nbsp;&nbsp;<asp:LoginName ID="LoginName1" runat="server" /> has logined. <asp:LoginStatus ID="LoginStatus1" runat="server" />
         </div>
         <div class="mainleft">
             <a href="../Events/CurrentEvent.aspx">Current Event</a><br />

@@ -10,24 +10,33 @@
 namespace PhotographyEvent.Events {
     
     
-    public partial class PreviousEvents {
+    public partial class EventDetails {
         
         /// <summary>
-        /// btnRetrieve control.
+        /// imgPreview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRetrieve;
+        protected global::System.Web.UI.WebControls.Image imgPreview;
         
         /// <summary>
-        /// gvPrevEvents control.
+        /// lblRule control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPrevEvents;
+        protected global::System.Web.UI.WebControls.Label lblRule;
+        
+        /// <summary>
+        /// gvEventUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvEventUsers;
     }
 }
