@@ -11,7 +11,7 @@ namespace PhotographyEvent
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnCreateUser_Click(object sender, EventArgs e)
@@ -32,7 +32,15 @@ namespace PhotographyEvent
             }
             else
             {
-                result = newUser.CreateUser();
+                if (hdIdChecked.Value == "OK")
+                {
+                    result = newUser.CreateUser();
+                }
+                else
+                {
+                    lblResult.Text = "Please choose other ID.";
+                    return;
+                }                
             }
 
             if (result)
@@ -52,19 +60,22 @@ namespace PhotographyEvent
             {
                 lblCheckId.Text = "Please type your ID";
                 lblCheckId.Visible = true;
+                hdIdChecked.Value = "";
                 return;
             }
 
             if (Models.User.CheckId(userId))
             {
                 lblCheckId.Text = "You can use this ID.";
-                lblCheckId.Visible = true;                
+                lblCheckId.Visible = true;
+                hdIdChecked.Value = "OK";
             }
             else
             {
                 lblCheckId.Text = "This id is being used by another user.";
                 lblCheckId.Visible = true;
                 txtUserId.Text = string.Empty;
+                hdIdChecked.Value = "";
             }
         }
     }

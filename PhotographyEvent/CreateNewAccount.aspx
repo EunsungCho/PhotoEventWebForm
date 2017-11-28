@@ -13,7 +13,7 @@
                     $("#txtAdminCode").hide();
                     $("#lblAdminKeyCode").hide();
                 };
-            })            
+            });
         })
 
         function showSuccess() {
@@ -47,7 +47,7 @@
                         <asp:Button ID="btnCheckId" runat="server" Text="Check ID" OnClick="btnCheckId_Click" CausesValidation="false" /><asp:Label ID="lblCheckId" runat="server" ClientIDMode="Static"></asp:Label><asp:RequiredFieldValidator ID="rfvUserId" runat="server" ErrorMessage="User Id is required" ForeColor="Red" ControlToValidate="txtUserId"></asp:RequiredFieldValidator>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                
+                <asp:HiddenField ID="hdIdChecked" runat="server" Value="" ClientIDMode="Static" />
             </td>
         </tr>
         <tr>

@@ -85,6 +85,15 @@ namespace PhotographyEvent {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserId;
         
         /// <summary>
+        /// hdIdChecked control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdIdChecked;
+        
+        /// <summary>
         /// txtPassword control.
         /// </summary>
         /// <remarks>
