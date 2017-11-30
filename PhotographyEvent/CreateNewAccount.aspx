@@ -45,9 +45,10 @@
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:Button ID="btnCheckId" runat="server" Text="Check ID" OnClick="btnCheckId_Click" CausesValidation="false" /><asp:Label ID="lblCheckId" runat="server" ClientIDMode="Static"></asp:Label><asp:RequiredFieldValidator ID="rfvUserId" runat="server" ErrorMessage="User Id is required" ForeColor="Red" ControlToValidate="txtUserId"></asp:RequiredFieldValidator>
+                        <asp:HiddenField ID="hdIdChecked" runat="server" Value="" ClientIDMode="Static" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:HiddenField ID="hdIdChecked" runat="server" Value="" ClientIDMode="Static" />
+                
             </td>
         </tr>
         <tr>
@@ -71,6 +72,7 @@
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
             <td>
                 <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Your Email address is required." ControlToValidate="txtEmail" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="Please Enter Valid Email ID"  ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail"></asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>

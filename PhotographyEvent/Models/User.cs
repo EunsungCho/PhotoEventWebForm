@@ -77,6 +77,46 @@ namespace PhotographyEvent.Models
                 }
             }
         }
+
+        public static Boolean CheckEmail(string emailAddr)
+        {
+            string findsql = @"select count(emailAddress) as cnt from Users where emailAddress = @email";
+            Dictionary<string, string> pList = new Dictionary<string, string>();
+            pList.Add("email", emailAddr);
+            using (SqlDataReader reader = Libs.DbHandler.getResultAsDataReaderDicParam(findsql, pList))
+            {
+                if (reader.Read())
+                {
+                    int count = Int32.Parse(reader["cnt"].ToString());
+                    if (count == 0)
+                        return true;
+                    else
+                        return false;
+                }
+                return false;
+            }
+        }
+
+        public static Boolean CheckEmail(string emailAddr, string userId)
+        {
+            string findsql = @"select count(emailAddress) as cnt from Users where emailAddress = @email and userId <> @uid";
+            Dictionary<string, string> pList = new Dictionary<string, string>();
+            pList.Add("email", emailAddr);
+            pList.Add("uid", userId);
+            using (SqlDataReader reader = Libs.DbHandler.getResultAsDataReaderDicParam(findsql, pList))
+            {
+                if (reader.Read())
+                {
+                    int count = Int32.Parse(reader["cnt"].ToString());
+                    if (count == 0)
+                        return true;
+                    else
+                        return false;
+                }
+                return false;
+            }
+        }
+
         public Boolean CreateUser()
         {
             string updateSql = "INSERT INTO USERS(userId, password, emailAddress) VALUES(@userId, @password, @emailAddress)";

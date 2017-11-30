@@ -19,6 +19,12 @@ namespace PhotographyEvent.Events
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (!Models.User.CheckEmail(txtEmail.Text.Trim(), User.Identity.Name))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "save", "alert('Email addres you input is being used by other user. Please choose other email address.');", true);
+                return;
+            }
+
             string update = @"update Users set EmailAddress = @email, FirstName = @fName, LastName = @lName
                                 where UserId = @uid";
             Dictionary<string, string> pList = new Dictionary<string, string>();

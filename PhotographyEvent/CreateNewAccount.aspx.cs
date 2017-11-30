@@ -23,6 +23,12 @@ namespace PhotographyEvent
             string adminKeyCode = txtAdminCode.Text.Trim();
 
             Models.User newUser = new Models.User(userId, password, emailAddr);
+            if (!Models.User.CheckEmail(emailAddr))
+            {
+                lblResult.Text = "Email addres you input is being used by other user. Please choose other email address.";
+                return;
+            }
+
             Boolean result = false;
 
             if (chkAdmin.Checked)
@@ -45,6 +51,12 @@ namespace PhotographyEvent
 
             if (result)
             {
+                string mailSubject = "PhotographyEvent User Created";
+                string mailMesage = "Hi " + userId + " "
+                        + "\n\nYour account has been created successfully.\n\nPlease remember your login id and you are welcome to our event. "
+                        + "\n\n Thank you!";
+                
+                Libs.Email.SendMailTo(mailSubject, mailMesage, emailAddr);
                 ClientScript.RegisterStartupScript(this.GetType(), "creation", "showSuccess();", true);
             }
             else

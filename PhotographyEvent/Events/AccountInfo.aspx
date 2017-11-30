@@ -24,7 +24,10 @@
                 </tr>
                 <tr>
                     <td style="text-align:right;">Email Address:</td><td><asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
-                    <td><asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email address is required."></asp:RequiredFieldValidator></td>
+                    <td>
+                        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email address is required." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="Please Enter Valid Email ID"  ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail"></asp:RegularExpressionValidator>
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align:right;">First Name:</td><td><asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox></td>
