@@ -9,19 +9,22 @@ using System.IO;
 
 namespace PhotographyEvent.Administration
 {
+    /// <summary>
+    /// This class is for showing Event details to users
+    /// </summary>
     public partial class EventDetails : System.Web.UI.Page
     {
-        private List<string> thumImageList;
-        private List<string> userIdList;
-        string eventId;
+        private List<string> thumImageList;     // variable for storing thumbnail image
+        private List<string> userIdList;        // variable for storing userId to show who had participated this event
+        string eventId;                         // specific event id to show event details
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            eventId = Request.QueryString["eventid"].ToString();
-            if (!IsPostBack)
+            eventId = Request.QueryString["eventid"].ToString();    // gets the event id from request
+            if (!IsPostBack)                    
             {                
-                DataBindField(eventId);
-                DataBindGrid(eventId);
+                DataBindField(eventId);         // Detailed event information binding
+                DataBindGrid(eventId);          // showing Participants information such uploaded picture and 
             }
         }
 

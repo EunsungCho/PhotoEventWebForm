@@ -76,10 +76,16 @@
     <Content Include="Events\EventDetails.aspx" />
     <Content Include="Events\PopupPhoto.aspx" />
     <Content Include="Events\PreviousEvents.aspx" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="MasterPages\Main.Master" />
     <Content Include="MasterPages\Admin.Master" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -102,6 +108,8 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\PhotoEvents\JavaScript.js" />
+    <Content Include="StyleSheets\font-awesome.min.css" />
+    <Content Include="StyleSheets\main.css" />
     <Content Include="StyleSheets\PhotographyEvent.css" />
     <Content Include="Test\Test.aspx" />
     <Content Include="Test\Test2.aspx" />
