@@ -5,25 +5,67 @@
 <html>
 <head runat="server">
     <title></title>
-    <link href="../StyleSheets/PhotographyEvent.css" rel="stylesheet" />    
+
+     <link href="../StyleSheets/menu.css" rel="stylesheet" />
+    <link href="../StyleSheets/zerogrid.css" rel="stylesheet" />
+    <link href="../StyleSheets/style.css" rel="stylesheet" />
+    <link href="../StyleSheets/align.css" rel="stylesheet" />
+
+    <link href="../StyleSheets/PhotographyEvent.css" rel="stylesheet" />
+    <link href="../StyleSheets/main.css" rel="stylesheet" />
     <script src="../Scripts/jquery-1.4.4.js"></script>
+    <script src="../Scripts/PhotoEvents/JavaScript.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div>
-            Logo & Photography Events Title & Login part&nbsp;&nbsp;&nbsp;<asp:LoginStatus ID="LoginStatus1" runat="server" />
-        </div>
-        <div class="mainleft">
-            <a href="../Administration/EventsList.aspx">Events List</a><br />
-            <a href="../Administration/UserManagement.aspx">User Management</a><br />
-            <%--<a href="../Administration/AccountInfo.aspx">Account Info</a>--%>
-        </div>
-        <div class="mainright">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+         <div class="wrap-body">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <header class="main-header">
+
+			<div class="zerogrid">
+                <div class="t-center">
+					<a class="site-branding" href="index.html">
+						<img src="../Images/logo.png" width="250px"/>	
+					</a><!-- .site-branding -->
+				</div>
+
+				<div class="row">
+					<div class="col-3-4">
+						<!-- Menu-main -->
+
+                        <div id='cssmenu'>
+							<ul>
+							   <li><a href="../Administration/EventsList.aspx" id="current_event"><span>Events List</span></a></li>
+							   <li><a href="../Administration/UserManagement.aspx" id="previous_event"><span>User Management</span></a></li>
+							   <li><a href="../Events/AccountInfo.aspx" id="account_info"><span>Account Info</span></a></li>
+							</ul>
+						</div>
+
+					</div>
+
+                    <div class="offset-3-4">
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                    </div>
+				</div>
+			</div>
+
+		</header>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
+        <footer>
+			<div class="zerogrid">
+				<div class="bottom-footer">
+					<div class="copyright">
+						Copyright @ - Designed by Dmitrii, Jade, Hemant
+					</div>
+				</div>
+			</div>
+		</footer>
+
         </div>
     </form>
 </body>

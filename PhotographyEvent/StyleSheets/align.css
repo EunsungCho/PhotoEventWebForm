@@ -1,0 +1,19 @@
+﻿.t-center {
+    text-align: center !important;
+}
+
+.t-left {
+    text-align: left;
+}
+
+.t-right {
+    text-align: right;
+}
+
+.f-right {
+    float: right;
+}
+
+.f-left {
+    float: left;
+}

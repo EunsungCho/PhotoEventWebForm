@@ -47,8 +47,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>Event Details</div>
-    <div>
-        <table style="width: 70%;">
+        <section id="container">
+        <div class="wrap-container zerogrid">
+
+            <!-----------------content-box-2-------------------->
+            <section class="content-box">
+                <div class="row wrap-box">
+                    <div class="box-text bg-3 col-full">
+                        <table style="width: 70%;">
             <tr>
                 <td>Event Title:</td>
                 <td>
@@ -114,28 +120,14 @@
                             </asp:GridView>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    
-                    <%--<asp:GridView ID="gvParticipants" runat="server" AutoGenerateColumns="false" DataKeyNames="EventId, UserID" OnRowCommand="gvParticipants_RowCommand" OnRowDataBound="gvParticipants_RowDataBound">
-                        <Columns>
-                            
-                            <asp:BoundField DataField="userId" HeaderText="User ID" />
-                            <asp:BoundField DataField="firstName" HeaderText="Name" />
-                            <asp:BoundField DataField="PhotoTitle" HeaderText="Title" />
-                            <asp:TemplateField HeaderText="Photo">
-                                <itemtemplate>
-                                            <asp:ImageButton ID="btnShowImg" runat="server" CommandName="SHOW" CommandArgument='<%# string.Format("{0}|{1}", Eval("EventId"), Eval("UserId")) %>' />
-                                        </itemtemplate>
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="NoOfVotes" HeaderText="No of Votes" />
-                            <asp:TemplateField HeaderText="Winner">
-                                <itemtemplate>
-                                            <asp:Button ID="btnWinner" runat="server" Text="Set" CommandArgument='<%# Eval("UserId") %>' CommandName="WINNER" />
-                                        </itemtemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>--%>
                 </td>
             </tr>
         </table>
-    </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
 </asp:Content>
