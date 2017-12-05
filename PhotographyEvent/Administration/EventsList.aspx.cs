@@ -8,21 +8,24 @@ using System.IO;
 
 namespace PhotographyEvent.Administration
 {
+
+    // This page shows all the events we held
     public partial class EventsList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                retrieveEventsList();
+                retrieveEventsList();   // retrieves and shows Event list data
             }
         }
 
         protected void btnRetieve_Click(object sender, EventArgs e)
         {
-            retrieveEventsList();
+            retrieveEventsList();       // retrieves and shows Event list data
         }
 
+        // creates and saves new event
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string eventTitle = txtTitle.Text.Trim();
@@ -30,6 +33,7 @@ namespace PhotographyEvent.Administration
             string fromDate = txtFromDate.Text;
             string toDate = txtToDate.Text;
 
+            // saves image data into database
             Stream fs = upPrevImage.PostedFile.InputStream;
             BinaryReader br = new BinaryReader(fs);
             Byte[] bytes = br.ReadBytes((Int32)fs.Length);
@@ -37,12 +41,16 @@ namespace PhotographyEvent.Administration
             Models.Event newEvent = new Models.Event(eventTitle, eventRule, fromDate, toDate, bytes);
             if (newEvent.CreateNewEvent())
             {
+                // creating new event, show list again
                 retrieveEventsList();
             }
         }
 
+        /// <summary>
+        /// Retrieves and shows all events
+        /// </summary>
         private void retrieveEventsList()
-        {
+        {            
             string select = @"select ROW_NUMBER() OVER(ORDER BY A.EventId) AS RowNo,
                                 a.EventId, a.EventName, (a.StartDate + ' ~ ' + a.EndDate) as EventDate,
                                 a.winner, COUNT(b.UserId) as NoParticipants,

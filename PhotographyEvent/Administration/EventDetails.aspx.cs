@@ -24,10 +24,14 @@ namespace PhotographyEvent.Administration
             if (!IsPostBack)                    
             {                
                 DataBindField(eventId);         // Detailed event information binding
-                DataBindGrid(eventId);          // showing Participants information such uploaded picture and 
+                DataBindGrid(eventId);          // Showing participants information such as uploaded picture and number of votes
             }
         }
 
+        /// <summary>
+        /// Binds specific event data to each field
+        /// </summary>
+        /// <param name="eid">event id to get data</param>
         private void DataBindField(string eid)
         {
             string select = @"SELECT EventId, EventName, StartDate, EndDate, IsClosed, Winner, EventRule
@@ -49,11 +53,17 @@ namespace PhotographyEvent.Administration
                 }
             }
 
+            // Puts a javascript function to pop up a new window showing Event preview image 
             btnShowImage.Attributes.Add("OnClick", "return popup('" + eventId + "', null);");
         }
 
+        /// <summary>
+        /// Gets and shows participants's data
+        /// </summary>
+        /// <param name="eid"></param>
         private void DataBindGrid(string eid)
         {
+            // First, gets userid and thumbnail photo data to store in the List varibles
             string select = @"select UserId, ThumbnailPhoto from EventUserPhotos where EventId = @eventId";
             Dictionary<string, string> pList = new Dictionary<string, string>();
             pList.Add("eventId", eid);
@@ -62,6 +72,7 @@ namespace PhotographyEvent.Administration
                 saveThumNailImageInList(reader);
             }
 
+            // Second, gets more participants' data again to show in the table
             select = @"Select A.EventId, a.UserId, C.FirstName, A.PhotoTitle, ISNULL(D.cnt, 0) as NoOfVotes
                         from EventUserPhotos as A
                         inner join Events as B on A.EventId = B.EventId and A.EventId = @eventId
@@ -75,18 +86,21 @@ namespace PhotographyEvent.Administration
             {
                 gvParticipants.DataSource = reader;
                 gvParticipants.DataBind();
-                SetWinnerColor(hdnWinner.Value);
+                SetWinnerColor(hdnWinner.Value);    // if winner exists, highlights it
             }
         }
 
+        // Changes uploaded Event preview image
         protected void btnReplace_Click(object sender, EventArgs e)
         {
+            // check if uploading file is empty or nothing
             if (upImage.PostedFile.FileName == "" || upImage.PostedFile.ContentLength == 0)
             {
                 Response.Write("<script>alert('No file to replace.');</script>");
                 return;
             }
                 
+            // replaces and show the result
             if (Models.Event.updateIntroImage(int.Parse(eventId), upImage.PostedFile))
             {
                 Response.Write("<script>alert('Succeeded to replace');</script>");
@@ -97,6 +111,7 @@ namespace PhotographyEvent.Administration
             }
         }
 
+        // updates modified data
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string eventName = txtTitle.Text.Trim();
@@ -123,43 +138,52 @@ namespace PhotographyEvent.Administration
             }
         }
 
+        // Table contains button setting winner and this event catches it and treats it
         protected void gvParticipants_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "WINNER")
+            if (e.CommandName == "WINNER")  // catches when winner setting
             {
-                string winnerId = e.CommandArgument.ToString();
+                string winnerId = e.CommandArgument.ToString(); // userId to set to winner
                 string update = @"Update Events Set Winner = @winner Where EventId = @eid";
                 Dictionary<string, string> pList = new Dictionary<string, string>();
                 pList.Add("winner", winnerId);
                 pList.Add("eid", eventId);
                 if (Libs.DbHandler.updateData(update, pList))
                 {
-                    SetWinnerColor(winnerId);
+                    SetWinnerColor(winnerId);   // Highlights the winner set by admin
                 }
                 else
                 {
                     foreach (GridViewRow row in gvParticipants.Rows)
                     {
-                        row.Cells[0].Attributes.Remove("style");                        
+                        row.Cells[0].Attributes.Remove("style");  // removes previous winner highlighting
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// puts a highlighting effect by adding style attribute to a winner when winner is set 
+        /// </summary>
+        /// <param name="winnerId">winner's user id to be highlighted</param>
         private void SetWinnerColor(string winnerId)
         {
             foreach (GridViewRow row in gvParticipants.Rows)
             {
-                row.Cells[0].Attributes.Remove("style");
-                ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = true;
+                row.Cells[0].Attributes.Remove("style");    // removes previous style
+                ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = true; // if disabled, enable the button
                 if (row.Cells[0].Text == winnerId)
                 {
-                    row.Cells[0].Attributes.Add("style", "color: red;");
-                    ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = false;
+                    row.Cells[0].Attributes.Add("style", "color: red;");    // sets the color of winner's userid to red
+                    ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = false;    // diable button to avoid unnecessary post back
                 }
             }
         }
 
+        /// <summary>
+        /// Uses memory variable to improve efficiency
+        /// </summary>
+        /// <param name="rd">data got from database</param>
         private void saveThumNailImageInList(System.Data.SqlClient.SqlDataReader rd)
         {
             thumImageList = new List<string>();
@@ -168,18 +192,19 @@ namespace PhotographyEvent.Administration
             //if (rd.HasRows && rd.Read())
             while(rd.Read())
             {
-                byte[] bytes = (byte[])rd["ThumbnailPhoto"];
+                byte[] bytes = (byte[])rd["ThumbnailPhoto"];    //ThumbnailPhoto column is type of varbinary
                 string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                 thumImageList.Add(base64String);
                 userIdList.Add(rd["UserId"].ToString());
             }
         }
 
+        // when row dagt binding, puts thumbnail image on button and javascript function
         protected void gvParticipants_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //DataRowView rv = (DataRowView)e.Row.DataItem;
+                //for image button
                 foreach (ImageButton btn in e.Row.Cells[3].Controls.OfType<ImageButton>())
                 {
                     btn.ImageUrl = "data:image/png;base64," + thumImageList[e.Row.RowIndex];
@@ -187,6 +212,7 @@ namespace PhotographyEvent.Administration
                     btn.Attributes.Add("onclick", "return popup('" + eventId + "', '" + userIdList[e.Row.RowIndex] + "');");
                 }
 
+                // puts javascript function to confirm to set winner
                 foreach (Button btn in e.Row.Cells[5].Controls.OfType<Button>())
                 {
                     btn.Attributes.Add("onclick", "return confirm('Are you going to set winner to " + e.Row.Cells[0].Text + "?');");
@@ -194,6 +220,7 @@ namespace PhotographyEvent.Administration
             }
         }
 
+        // Event closing check box event updates isClosed column of events table to mark event finished
         protected void chClose_CheckedChanged(object sender, EventArgs e)
         {
             string update = @"update events set isClosed = @isclosed where eventid = @eid";
