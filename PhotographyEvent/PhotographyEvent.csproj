@@ -70,6 +70,10 @@
     <Content Include="Administration\EventsList.aspx" />
     <Content Include="Administration\UserManagement.aspx" />
     <Content Include="Administration\ViewPhoto.aspx" />
+    <Content Include="App_Data\WebProjectDB.mdf" />
+    <Content Include="App_Data\WebProjectDB_log.ldf">
+      <DependentUpon>WebProjectDB.mdf</DependentUpon>
+    </Content>
     <Content Include="CreateNewAccount.aspx" />
     <Content Include="Events\AccountInfo.aspx" />
     <Content Include="Events\CurrentEvent.aspx" />
@@ -77,6 +81,8 @@
     <Content Include="Events\PopupPhoto.aspx" />
     <Content Include="Events\PreviousEvents.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="MasterPages\Main.Master" />
@@ -108,9 +114,13 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\PhotoEvents\JavaScript.js" />
+    <Content Include="StyleSheets\align.css" />
     <Content Include="StyleSheets\font-awesome.min.css" />
     <Content Include="StyleSheets\main.css" />
+    <Content Include="StyleSheets\menu.css" />
     <Content Include="StyleSheets\PhotographyEvent.css" />
+    <Content Include="StyleSheets\style.css" />
+    <Content Include="StyleSheets\zerogrid.css" />
     <Content Include="Test\Test.aspx" />
     <Content Include="Test\Test2.aspx" />
     <Content Include="Web.config">
@@ -247,10 +257,7 @@
       <DependentUpon>Test2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
