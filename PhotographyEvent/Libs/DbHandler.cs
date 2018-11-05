@@ -8,10 +8,20 @@ using System.Data.SqlClient;
 
 namespace PhotographyEvent.Libs
 {
+    /// <summary>
+    /// Class for Database work
+    /// </summary>
     public class DbHandler
     {
+        // Gets connection string for database and save it to local variable connString
         private static string connString = WebConfigurationManager.ConnectionStrings["PhotographyEventData"].ConnectionString;
         
+        /// <summary>
+        /// Gets result dataset as a DataReader
+        /// </summary>
+        /// <param name="select">sql select string to execute</param>
+        /// <param name="pList">parameter list</param>
+        /// <returns></returns>
         public static SqlDataReader getResultAsDataReader(string select, List<SqlParameter> pList)
         {
             SqlConnection connection = new SqlConnection(connString);
