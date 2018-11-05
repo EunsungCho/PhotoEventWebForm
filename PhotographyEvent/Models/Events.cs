@@ -9,6 +9,8 @@ using System.IO;
 
 namespace PhotographyEvent.Models
 {
+    
+    // Class for Event table
     public class Event
     {
         private int eventId;
@@ -21,6 +23,7 @@ namespace PhotographyEvent.Models
         //public byte[] ThumbPrevImage { get; set; }
         public string EventRule { get; set; }
 
+        // constuctor
         public Event(string eventName, string eventRule, string startDate, string endDate, byte[] pImage)
         {
             this.EventName = eventName;
@@ -30,6 +33,10 @@ namespace PhotographyEvent.Models
             this.PreviewImage = pImage;
         }
 
+        /// <summary>
+        /// Create new account with given paramters
+        /// </summary>
+        /// <returns>true if succeeds or false if fails</returns>
         public Boolean CreateNewEvent()
         {
             string createSql = "insert into Events(EventName, StartDate, EndDate, IntroImage, EventRule) " +
@@ -53,6 +60,12 @@ namespace PhotographyEvent.Models
             return Libs.DbHandler.updateData(createSql, pList);
         }
 
+        /// <summary>
+        /// Replaces preview image uploaded before
+        /// </summary>
+        /// <param name="eventId">target event id</param>
+        /// <param name="pfile">HttpPostedFile object</param>
+        /// <returns>true if succeeds or false if fails</returns>
         public static Boolean updateIntroImage(int eventId, HttpPostedFile pfile)
         {
             Stream fs = pfile.InputStream;

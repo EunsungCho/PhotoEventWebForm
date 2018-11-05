@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 
 namespace PhotographyEvent.Events
 {
+    
+    // This page shows event details selected.
     public partial class EventDetails : System.Web.UI.Page
     {
         private string curEventId = string.Empty;
@@ -19,9 +21,10 @@ namespace PhotographyEvent.Events
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            curEventId = Request.QueryString["eid"];
+            curEventId = Request.QueryString["eid"];    // gets target event id from request
             if (!IsPostBack)
             {
+                // shows detail information
                 ShowPreviewImageAndEventRule(curEventId);
                 BindUserPhotos(curEventId);
             }
@@ -33,6 +36,10 @@ namespace PhotographyEvent.Events
             
         }
         
+        /// <summary>
+        /// show preview image and event rule on control
+        /// </summary>
+        /// <param name="curEventId">target event id to select preview image and rule</param>
         private void ShowPreviewImageAndEventRule(string curEventId)
         {
             string select = @"Select IntroImage, EventRule From Events Where EventId = @eventId";
@@ -44,12 +51,16 @@ namespace PhotographyEvent.Events
                 {
                     byte[] bytes = (byte[])reader["IntroImage"];
                     string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                    imgPreview.ImageUrl = "data:image/png;base64," + base64String;
-                    lblRule.Text = reader["EventRule"].ToString();
+                    imgPreview.ImageUrl = "data:image/png;base64," + base64String;  // put image on the image control
+                    lblRule.Text = reader["EventRule"].ToString();  // shows event rule
                 }
             }
         }
 
+        /// <summary>
+        /// shows user photo data on the table
+        /// </summary>
+        /// <param name="curEventId"></param>
         private void BindUserPhotos(string curEventId)
         {
             string select = @"select a.EventId, a.UserId, a.ThumbnailPhoto, a.PhotoTitle
@@ -80,6 +91,10 @@ namespace PhotographyEvent.Events
             }
         }
 
+        /// <summary>
+        /// saves thumbnail photo and userid data into memory
+        /// </summary>
+        /// <param name="rd"></param>
         private void saveThumNailImageInList(SqlDataReader rd)
         {
             thumImageList = new List<string>();
@@ -93,6 +108,7 @@ namespace PhotographyEvent.Events
             }
         }
 
+        // When photo data is bound to grid, put thumbnail photo on the button control in table row
         protected void gvEventUsers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)

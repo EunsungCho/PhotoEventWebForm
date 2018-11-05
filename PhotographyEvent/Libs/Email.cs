@@ -10,8 +10,16 @@ using System.Configuration;
 
 namespace PhotographyEvent.Libs
 {
+    
+    // Class for handling email function
     class Email
     {
+        /// <summary>
+        /// sends email to designated user with given message
+        /// </summary>
+        /// <param name="Subject">subject of mail</param>
+        /// <param name="Mail">body contents to send</param>
+        /// <param name="Email">receiver's email</param>
         public static void SendMailTo(string Subject, string Mail, string Email)
         {
             try
@@ -32,7 +40,7 @@ namespace PhotographyEvent.Libs
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.ToString());
+                
             }
         }
     }

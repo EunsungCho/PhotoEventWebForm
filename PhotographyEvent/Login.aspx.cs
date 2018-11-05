@@ -16,19 +16,23 @@ namespace PhotographyEvent
 
         }
 
+        // Authentication
         protected void btnLogin_Click(object sender, EventArgs e)
         {            
             string userId = txtUserId.Text.Trim();
             string pass = txtPassword.Text.Trim();
             if (Models.User.AuthenticateUser(userId, pass))
             {
+                // user id authenticated
                 if (Models.User.isAdministrator(userId))
                 {
+                    // administrator logged in, so redirect to administator's main page, EventList
                     FormsAuthentication.SetAuthCookie(userId, true);
                     Response.Redirect("~/Administration/EventsList.aspx");
                 }
                 else
                 {
+                    // general user authenticated, so issues authentication ticket and redirect
                     FormsAuthentication.RedirectFromLoginPage(userId, true);
                 }
                 

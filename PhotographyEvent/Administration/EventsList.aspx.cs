@@ -8,7 +8,7 @@ using System.IO;
 
 namespace PhotographyEvent.Administration
 {
-
+    
     // This page shows all the events we held
     public partial class EventsList : System.Web.UI.Page
     {

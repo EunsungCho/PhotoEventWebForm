@@ -24,9 +24,39 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <asp:GridView ID="gvEventUsers" runat="server" AutoGenerateColumns="false" DataKeyNames="EventId, UserId" OnRowCommand="gvEventUsers_RowCommand" OnRowDataBound="gvEventUsers_RowDataBound">
+                                            <asp:UpdatePanel ID="upanel1" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:GridView ID="gvEventUsers" runat="server" AutoGenerateColumns="false" DataKeyNames="EventId, UserId" OnRowCommand="gvEventUsers_RowCommand" OnRowDataBound="gvEventUsers_RowDataBound">
+                                                        <EmptyDataTemplate>
+                                                            There is no current event Participants now.
+                                                        </EmptyDataTemplate>
+                                                        <Columns>
+                                                            <asp:BoundField DataField="FirstName" HeaderText="Name" />
+                                                            <asp:BoundField DataField="PhotoTitle" HeaderText="Title" />
+                                                            <asp:TemplateField HeaderText="Photo">
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="btnPhoto" runat="server" CommandArgument='<%# string.Format("{0}|{1}", Eval("EventId"), Eval("UserId")) %>' CommandName="PHOTO" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="score" HeaderText="Score" />
+                                                            <asp:TemplateField HeaderText="Vote">
+                                                                <ItemTemplate>
+                                                                    <asp:Button ID="btnVote" runat="server" Text="Vote" CommandArgument='<%# string.Format("{0}|{1}", Eval("EventId"), Eval("UserId")) %>' CommandName="VOTE" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="UserIdToVote" HeaderText="VoteId" Visible="false" />
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                    <asp:Label ID="lblVoteResponse" runat="server"></asp:Label>
+                                                </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="gvEventUsers" EventName="RowCommand" />
+                                                    <asp:AsyncPostBackTrigger ControlID="btnUpdateTitle" EventName="Click" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>
+                                            <%--<asp:GridView ID="gvEventUsers" runat="server" AutoGenerateColumns="false" DataKeyNames="EventId, UserId" OnRowCommand="gvEventUsers_RowCommand" OnRowDataBound="gvEventUsers_RowDataBound">
                                                 <EmptyDataTemplate>
-                                                    There is no current event now.
+                                                    There is no current event Participants now.
                                                 </EmptyDataTemplate>
                                                 <Columns>
                                                     <asp:BoundField DataField="FirstName" HeaderText="Name" />
@@ -44,9 +74,9 @@
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="UserIdToVote" HeaderText="VoteId" Visible="false" />
                                                 </Columns>
-                                            </asp:GridView>
+                                            </asp:GridView>--%>
                                             <br />
-                                            <asp:Label ID="lblVoteResponse" runat="server"></asp:Label>
+                                            <%--<asp:Label ID="lblVoteResponse" runat="server"></asp:Label>--%>
                                         </td>
                                     </tr>
                                 </table>
@@ -58,7 +88,17 @@
                                         <tr>
                                             <td>Photo Title: </td>
                                             <td>
-                                                <asp:TextBox ID="txtPhotoTitle" runat="server" Width="400px"></asp:TextBox></td>
+                                                <asp:UpdatePanel ID="upanelTitle" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:TextBox ID="txtPhotoTitle" runat="server" Width="400px"></asp:TextBox>&nbsp;&nbsp;<asp:Label ID="lblTitleResult" runat="server" Text=""></asp:Label>
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="btnUpdateTitle" EventName="Click" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                                <%--<asp:TextBox ID="txtPhotoTitle" runat="server" Width="400px"></asp:TextBox>--%>
+                                                <asp:Button ID="btnUpdateTitle" runat="server" Text="Modify" OnClick="btnUpdateTitle_Click" />&nbsp;&nbsp;<%--<asp:Label ID="lblTitleResult" runat="server" Text=""></asp:Label>--%>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td></td>

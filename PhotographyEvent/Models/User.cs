@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 
 namespace PhotographyEvent.Models
 {
+    
+    // Class for Users Table
     public class User
     {
         public string userId { get; set; }
@@ -15,8 +17,11 @@ namespace PhotographyEvent.Models
         public string emailAddress { get; set; }
         public Boolean isAdmin { get; set; }
         public string password { get; set; }
+
+        // Code for verifying when new administrator is enrolled
         public static string adminKeyCode { get { return System.Web.Configuration.WebConfigurationManager.AppSettings["adminkeycode"]; } }
 
+        // Constructor
         public User(string userId, string password, string email)
         {
             this.userId = userId;
@@ -24,6 +29,7 @@ namespace PhotographyEvent.Models
             this.emailAddress = email;
         }
 
+        // Constructor overload
         public User(string userId, string password, string email, string firstName, string lastName, Boolean isAdmin) : this(userId, password, email)
         {
             this.firstName = firstName;
@@ -31,6 +37,11 @@ namespace PhotographyEvent.Models
             this.isAdmin = isAdmin;
         }
 
+        /// <summary>
+        /// Not used
+        /// </summary>
+        /// <param name="newUserId"></param>
+        /// <returns></returns>
         public User getUser(string newUserId)
         {
             string selectSql = "select * from Users where userId = @findingId";
@@ -60,6 +71,11 @@ namespace PhotographyEvent.Models
             }
         }
 
+        /// <summary>
+        /// validate the new user id whether new id is available
+        /// </summary>
+        /// <param name="userId">user id to find in users table</param>
+        /// <returns></returns>
         public static Boolean CheckId(string userId)
         {
             string findsql = "select userId from Users Where userId = @userId";
@@ -69,6 +85,7 @@ namespace PhotographyEvent.Models
             {
                 if (reader != null && reader.HasRows == true)
                 {
+                    // existing user id
                     return false;
                 }
                 else
@@ -78,6 +95,11 @@ namespace PhotographyEvent.Models
             }
         }
 
+        /// <summary>
+        /// validate if email address is duplicate
+        /// </summary>
+        /// <param name="emailAddr">email id to find</param>
+        /// <returns></returns>
         public static Boolean CheckEmail(string emailAddr)
         {
             string findsql = @"select count(emailAddress) as cnt from Users where emailAddress = @email";
@@ -89,7 +111,7 @@ namespace PhotographyEvent.Models
                 {
                     int count = Int32.Parse(reader["cnt"].ToString());
                     if (count == 0)
-                        return true;
+                        return true;    // no email id
                     else
                         return false;
                 }
@@ -97,6 +119,12 @@ namespace PhotographyEvent.Models
             }
         }
 
+        /// <summary>
+        /// not used
+        /// </summary>
+        /// <param name="emailAddr"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static Boolean CheckEmail(string emailAddr, string userId)
         {
             string findsql = @"select count(emailAddress) as cnt from Users where emailAddress = @email and userId <> @uid";
@@ -117,6 +145,10 @@ namespace PhotographyEvent.Models
             }
         }
 
+        /// <summary>
+        /// Create new account
+        /// </summary>
+        /// <returns></returns>
         public Boolean CreateUser()
         {
             string updateSql = "INSERT INTO USERS(userId, password, emailAddress) VALUES(@userId, @password, @emailAddress)";
@@ -128,9 +160,14 @@ namespace PhotographyEvent.Models
             return Libs.DbHandler.updateData(updateSql, pList);
         }
 
+        /// <summary>
+        /// Create new administrator account
+        /// </summary>
+        /// <param name="keyCode">predefined code to quialify admin</param>
+        /// <returns></returns>
         public Boolean CreateAdminUser(string keyCode)
         {
-            if (adminKeyCode != keyCode)
+            if (adminKeyCode != keyCode)    // false administrator
                 return false;
 
             string updateSql = "INSERT INTO USERS(userId, password, emailAddress, IsAdmin) VALUES(@userId, @password, @emailAddress, @isAdmin)";
@@ -143,11 +180,12 @@ namespace PhotographyEvent.Models
             return Libs.DbHandler.updateData(updateSql, pList);
         }
 
-        public Boolean UpdateUser(string emailAddress, string firstName, string lastName)
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// validate user
+        /// </summary>
+        /// <param name="userId">user id to find</param>
+        /// <param name="password">password to compare</param>
+        /// <returns>true if authenticated or false if not</returns>
         public static Boolean AuthenticateUser(string userId, string password)
         {
             List<SqlParameter> pList = new List<SqlParameter>();
@@ -161,7 +199,7 @@ namespace PhotographyEvent.Models
                     {
                         if (password == reader["Password"].ToString())
                         {
-                            return true;
+                            return true;    // user authenticated
                         }
                         else
                         {
@@ -180,16 +218,20 @@ namespace PhotographyEvent.Models
             }
         }
 
-        public static User[] getAllUsers()
-        {
-            return null;
-        }
-
+        /// <summary>
+        /// gets predefined key code form web.config
+        /// </summary>
+        /// <returns></returns>
         public static string getAdminKeyCode()
         {
             return System.Web.Configuration.WebConfigurationManager.AppSettings["adminkeycode"];
         }
 
+        /// <summary>
+        /// check if the userid given is administrator
+        /// </summary>
+        /// <param name="userId">user id to check</param>
+        /// <returns>true if administrator or false if not administrator</returns>
         public static Boolean isAdministrator(string userId)
         {
             string select = "Select IsAdmin From Users where userid = @findingId";
@@ -209,6 +251,11 @@ namespace PhotographyEvent.Models
             }
         }
 
+        /// <summary>
+        /// get user's first name
+        /// </summary>
+        /// <param name="userId">user id to find</param>
+        /// <returns>found user's first name</returns>
         public static string getUserFirstName(string userId)
         {
             string select = @"SELECT firstName From Users Where userId = @findingId";

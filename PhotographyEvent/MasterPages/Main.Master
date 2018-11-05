@@ -4,13 +4,13 @@
 
 <html>
 <head runat="server">
-    <link href="../StyleSheets/menu.css" rel="stylesheet" />
+    <%--<link href="../StyleSheets/menu.css" rel="stylesheet" />
     <link href="../StyleSheets/zerogrid.css" rel="stylesheet" />
     <link href="../StyleSheets/style.css" rel="stylesheet" />
-    <link href="../StyleSheets/align.css" rel="stylesheet" />
+    <link href="../StyleSheets/align.css" rel="stylesheet" />--%>
 
     <link href="../StyleSheets/PhotographyEvent.css" rel="stylesheet" />
-    <link href="../StyleSheets/main.css" rel="stylesheet" />
+    <%--<link href="../StyleSheets/main.css" rel="stylesheet" />--%>
     <script src="../Scripts/jquery-1.4.4.js"></script>
     <script src="../Scripts/PhotoEvents/JavaScript.js"></script>
 
@@ -29,7 +29,7 @@
 
 			<div class="zerogrid">
                 <div class="t-center">
-					<a class="site-branding" href="index.html">
+					<a class="site-branding" href="Main.aspx">
 						<img src="../Images/logo.png" width="250px"/>	
 					</a><!-- .site-branding -->
 				</div>

@@ -31,6 +31,15 @@ namespace PhotographyEvent.Events {
         protected global::System.Web.UI.WebControls.Label lblRule;
         
         /// <summary>
+        /// upanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upanel1;
+        
+        /// <summary>
         /// gvEventUsers control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace PhotographyEvent.Events {
         protected global::System.Web.UI.WebControls.Panel pnUpload;
         
         /// <summary>
+        /// upanelTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upanelTitle;
+        
+        /// <summary>
         /// txtPhotoTitle control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,24 @@ namespace PhotographyEvent.Events {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhotoTitle;
+        
+        /// <summary>
+        /// lblTitleResult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitleResult;
+        
+        /// <summary>
+        /// btnUpdateTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateTitle;
         
         /// <summary>
         /// fuPhoto control.

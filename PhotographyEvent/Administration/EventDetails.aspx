@@ -91,7 +91,7 @@
             <tr style="height: 50px;">
                 <td colspan="2" style="text-align: right; vertical-align: text-top;">
                     <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
-                    <asp:HiddenField ID="hdnWinner" runat="server" />
+                    <%--<asp:HiddenField ID="hdnWinner" runat="server" />--%>
                 </td>
             </tr>
             <tr>
@@ -118,7 +118,11 @@
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
+                            <asp:HiddenField ID="hdnWinner" runat="server" />
                         </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="gvParticipants" EventName="RowCommand" />
+                        </Triggers>
                     </asp:UpdatePanel>
                 </td>
             </tr>

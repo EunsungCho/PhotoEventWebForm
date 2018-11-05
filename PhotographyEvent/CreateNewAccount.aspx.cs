@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 
 namespace PhotographyEvent
 {
+    
+    // Page to create new user account
     public partial class CreateNewAccount : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -14,6 +16,7 @@ namespace PhotographyEvent
             
         }
 
+        // create new account with userid, password and email address
         protected void btnCreateUser_Click(object sender, EventArgs e)
         {
             string userId = txtUserId.Text.Trim();
@@ -23,6 +26,7 @@ namespace PhotographyEvent
             string adminKeyCode = txtAdminCode.Text.Trim();
 
             Models.User newUser = new Models.User(userId, password, emailAddr);
+            // check availiability of email addres before creation of new user
             if (!Models.User.CheckEmail(emailAddr))
             {
                 lblResult.Text = "Email addres you input is being used by other user. Please choose other email address.";
@@ -33,13 +37,15 @@ namespace PhotographyEvent
 
             if (chkAdmin.Checked)
             {
+                // when creating new administrator
                 newUser.isAdmin = true;
                 result = newUser.CreateAdminUser(adminKeyCode);
             }
             else
-            {
+            {   // when creating general user
                 if (hdIdChecked.Value == "OK")
                 {
+                    // id check is necessary to create user
                     result = newUser.CreateUser();
                 }
                 else
@@ -51,6 +57,7 @@ namespace PhotographyEvent
 
             if (result)
             {
+                // user creation succeeded, so send email
                 string mailSubject = "PhotographyEvent User Created";
                 string mailMesage = "Hi " + userId + " "
                         + "\n\nYour account has been created successfully.\n\nPlease remember your login id and you are welcome to our event. "
@@ -65,6 +72,7 @@ namespace PhotographyEvent
             }
         }
 
+        // check the availibity of new user id
         protected void btnCheckId_Click(object sender, EventArgs e)
         {
             string userId = txtUserId.Text.Trim();

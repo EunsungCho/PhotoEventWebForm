@@ -7,10 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace PhotographyEvent.Events
 {
+    
+    // This page shows user's photo in real size on popup window
     public partial class PopupPhoto : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // gets event id and user id from request object
             string eventId = Request.QueryString["eid"];
             string userId = Request.QueryString["uid"];
 

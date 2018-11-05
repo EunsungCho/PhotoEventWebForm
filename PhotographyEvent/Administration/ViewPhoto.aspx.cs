@@ -7,8 +7,10 @@ using System.Web.UI.WebControls;
 
 namespace PhotographyEvent.Administration
 {
+    
     public partial class ViewPhoto : System.Web.UI.Page
     {
+        // This page shows the picture uploaded in original size
         protected void Page_Load(object sender, EventArgs e)
         {
             string eventId = Request.QueryString["eid"];
@@ -21,6 +23,8 @@ namespace PhotographyEvent.Administration
             string photoColName = string.Empty;
             string titleColName = string.Empty;
             Dictionary<string, string> pList = new Dictionary<string, string>();
+
+            // when userId is null, select image from events table
             if (userId == "null")
             {
                 select = @"Select EventName, IntroImage From Events Where EventId = @eid";
@@ -29,6 +33,7 @@ namespace PhotographyEvent.Administration
             }
             else
             {
+                // otherwise, select image from EventUserPhotos table.
                 select = @"Select PhotoTitle, Photo From EventUserPhotos Where EventId = @eid and UserId = @uid";
                 photoColName = "Photo";
                 titleColName = "PhotoTitle";
@@ -41,6 +46,7 @@ namespace PhotographyEvent.Administration
             {
                 if (reader.Read())
                 {
+                    // convert into binary format to show image
                     byte[] bytes = (byte[])reader[photoColName];
                     string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                     imgPhoto.ImageUrl = "data:image/png;base64," + base64String;

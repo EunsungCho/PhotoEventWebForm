@@ -9,9 +9,7 @@ using System.IO;
 
 namespace PhotographyEvent.Administration
 {
-    /// <summary>
-    /// This class is for showing Event details to users
-    /// </summary>
+    // This class is for showing Event details to users
     public partial class EventDetails : System.Web.UI.Page
     {
         private List<string> thumImageList;     // variable for storing thumbnail image
@@ -144,13 +142,26 @@ namespace PhotographyEvent.Administration
             if (e.CommandName == "WINNER")  // catches when winner setting
             {
                 string winnerId = e.CommandArgument.ToString(); // userId to set to winner
-                string update = @"Update Events Set Winner = @winner Where EventId = @eid";
+                string update = string.Empty;
                 Dictionary<string, string> pList = new Dictionary<string, string>();
-                pList.Add("winner", winnerId);
+
+                string hdnValue = hdnWinner.Value.ToString();
+                if (hdnValue.Equals(winnerId))
+                {
+                    update = @"Update Events Set Winner = NULL Where EventId = @eid";
+                }
+                else
+                {                    
+                    update = @"Update Events Set Winner = @winner Where EventId = @eid";
+                    pList.Add("winner", winnerId);
+                }
+                
                 pList.Add("eid", eventId);
                 if (Libs.DbHandler.updateData(update, pList))
                 {
-                    SetWinnerColor(winnerId);   // Highlights the winner set by admin
+                    //SetWinnerColor(winnerId);   // Highlights the winner set by admin
+                    DataBindField(eventId);
+                    DataBindGrid(eventId);
                 }
                 else
                 {
@@ -171,11 +182,13 @@ namespace PhotographyEvent.Administration
             foreach (GridViewRow row in gvParticipants.Rows)
             {
                 row.Cells[0].Attributes.Remove("style");    // removes previous style
-                ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = true; // if disabled, enable the button
+                //((Button)row.Cells[5].FindControl("btnWinner")).Enabled = true; // if disabled, enable the button
+                ((Button)row.Cells[5].FindControl("btnWinner")).Text = "Set";
                 if (row.Cells[0].Text == winnerId)
                 {
                     row.Cells[0].Attributes.Add("style", "color: red;");    // sets the color of winner's userid to red
-                    ((Button)row.Cells[5].FindControl("btnWinner")).Enabled = false;    // diable button to avoid unnecessary post back
+                    //((Button)row.Cells[5].FindControl("btnWinner")).Enabled = false;    // diable button to avoid unnecessary post back
+                    ((Button)row.Cells[5].FindControl("btnWinner")).Text = "Unset";
                 }
             }
         }
